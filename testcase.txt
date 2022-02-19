@@ -1,0 +1,14 @@
+function calculateTax(int bracket) 
+
+	for(int i = 0; i <bracket; i= i++) {
+		bracket = bracket * (i / 20);
+
+		if(bracket >= 1000)
+			break;
+		}
+
+	return bracket;
+
+end calculateTax
+
+int 9user = 5;
