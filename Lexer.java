@@ -34,46 +34,7 @@ public class Lexer {
 		}
 	}
 
-	private static void initializeTokens() {
-
-		try {
-			wordsAndOperatorsDictionary.put("if", Token.IF);
-			wordsAndOperatorsDictionary.put("for", Token.FOR);
-			wordsAndOperatorsDictionary.put("while", Token.WHILE);
-			wordsAndOperatorsDictionary.put("function", Token.FUNCTION);
-			wordsAndOperatorsDictionary.put("return", Token.RETURN);
-			wordsAndOperatorsDictionary.put("int", Token.INT);
-			wordsAndOperatorsDictionary.put("else", Token.ELSE);
-			wordsAndOperatorsDictionary.put("do", Token.DO);
-			wordsAndOperatorsDictionary.put("break", Token.BREAK);
-			wordsAndOperatorsDictionary.put("end", Token.END);
-			wordsAndOperatorsDictionary.put("=", Token.ASSIGN);
-			wordsAndOperatorsDictionary.put("+", Token.ADD);
-			wordsAndOperatorsDictionary.put("-", Token.SUB);
-			wordsAndOperatorsDictionary.put("*", Token.MUL);
-			wordsAndOperatorsDictionary.put("/", Token.DIV);
-			wordsAndOperatorsDictionary.put("%", Token.MOD);
-			wordsAndOperatorsDictionary.put(">", Token.GT);
-			wordsAndOperatorsDictionary.put("<", Token.LT);
-			wordsAndOperatorsDictionary.put(">=", Token.GE);
-			wordsAndOperatorsDictionary.put("<=", Token.LE);
-			wordsAndOperatorsDictionary.put("++", Token.INC);
-			wordsAndOperatorsDictionary.put("(", Token.LP);
-			wordsAndOperatorsDictionary.put(")", Token.RP);
-			wordsAndOperatorsDictionary.put("{", Token.LB);
-			wordsAndOperatorsDictionary.put("}", Token.RB);
-			wordsAndOperatorsDictionary.put("|", Token.OR);
-			wordsAndOperatorsDictionary.put("&", Token.AND);
-			wordsAndOperatorsDictionary.put("==", Token.EE);
-			wordsAndOperatorsDictionary.put("!", Token.NEG);
-			wordsAndOperatorsDictionary.put(",", Token.COMMA);
-			wordsAndOperatorsDictionary.put(";", Token.SEMI);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static void analyzeCodeLine(String line) throws Exception {
+private static void analyzeCodeLine(String line) throws Exception {
 		if (!line.isEmpty()) {
 			String[] lineArr = line.split(" ");
 			for (String str : lineArr) {
@@ -232,5 +193,46 @@ public class Lexer {
 
 		return isValid;
 	}
+	
+	private static void initializeTokens() {
+
+		try {
+			wordsAndOperatorsDictionary.put("if", Token.IF);
+			wordsAndOperatorsDictionary.put("for", Token.FOR);
+			wordsAndOperatorsDictionary.put("while", Token.WHILE);
+			wordsAndOperatorsDictionary.put("function", Token.FUNCTION);
+			wordsAndOperatorsDictionary.put("return", Token.RETURN);
+			wordsAndOperatorsDictionary.put("int", Token.INT);
+			wordsAndOperatorsDictionary.put("else", Token.ELSE);
+			wordsAndOperatorsDictionary.put("do", Token.DO);
+			wordsAndOperatorsDictionary.put("break", Token.BREAK);
+			wordsAndOperatorsDictionary.put("end", Token.END);
+			wordsAndOperatorsDictionary.put("=", Token.ASSIGN);
+			wordsAndOperatorsDictionary.put("+", Token.ADD);
+			wordsAndOperatorsDictionary.put("-", Token.SUB);
+			wordsAndOperatorsDictionary.put("*", Token.MUL);
+			wordsAndOperatorsDictionary.put("/", Token.DIV);
+			wordsAndOperatorsDictionary.put("%", Token.MOD);
+			wordsAndOperatorsDictionary.put(">", Token.GT);
+			wordsAndOperatorsDictionary.put("<", Token.LT);
+			wordsAndOperatorsDictionary.put(">=", Token.GE);
+			wordsAndOperatorsDictionary.put("<=", Token.LE);
+			wordsAndOperatorsDictionary.put("++", Token.INC);
+			wordsAndOperatorsDictionary.put("(", Token.LP);
+			wordsAndOperatorsDictionary.put(")", Token.RP);
+			wordsAndOperatorsDictionary.put("{", Token.LB);
+			wordsAndOperatorsDictionary.put("}", Token.RB);
+			wordsAndOperatorsDictionary.put("|", Token.OR);
+			wordsAndOperatorsDictionary.put("&", Token.AND);
+			wordsAndOperatorsDictionary.put("==", Token.EE);
+			wordsAndOperatorsDictionary.put("!", Token.NEG);
+			wordsAndOperatorsDictionary.put(",", Token.COMMA);
+			wordsAndOperatorsDictionary.put(";", Token.SEMI);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	
 
 }
