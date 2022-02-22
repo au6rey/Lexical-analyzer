@@ -34,12 +34,12 @@ public class Lexer {
 		}
 	}
 
-private static void analyzeCodeLine(String line) throws Exception {
+	private static void analyzeCodeLine(String line) throws Exception {
 		if (!line.isEmpty()) {
 			String[] lineArr = line.split(" ");
 			for (String str : lineArr) {
 				Token token = null;
-				
+
 				if (wordsAndOperatorsDictionary.containsKey(str.toLowerCase())) {
 					token = wordsAndOperatorsDictionary.get(str.toLowerCase());
 					System.out.println(token);
@@ -56,11 +56,11 @@ private static void analyzeCodeLine(String line) throws Exception {
 		String word = "";
 		String operator = "";
 		char[] chars = str.toCharArray();
-		
+
 		if (chars.length > 1) {
 			char nextChar;
-			
-			if ((Character.isLetter(chars[0]) || Character.isDigit(chars[0]))) {
+
+			if (isLetterOrDigit(chars[0])) {
 				word += chars[0];
 			} else {
 				operator += chars[0];
@@ -74,13 +74,13 @@ private static void analyzeCodeLine(String line) throws Exception {
 				if (!isLastIndex) {
 					boolean canCheckLongOperator = i + 1 <= chars.length - 1;
 					boolean isComparisonOperator = (nextChar == '<' || nextChar == '>' || nextChar == '=');
-					
+
 					currentOperatorHasMoreThanOneSymbol = canCheckLongOperator
 							&& ((isComparisonOperator && chars[i + 1] == '=')
 									|| (nextChar == '+' && chars[i + 1] == '+'));
 				}
 
-				if ((Character.isLetter(nextChar) || Character.isDigit(nextChar))) {
+				if (isLetterOrDigit(nextChar)) {
 					word += nextChar;
 
 					if (currentOperatorHasMoreThanOneSymbol) {
@@ -126,12 +126,12 @@ private static void analyzeCodeLine(String line) throws Exception {
 		} else {
 			String character = chars[0] + "";
 			boolean isValid = false;
-			
-			if(Character.isLetter(chars[0]) || Character.isLetter(chars[0])) {
+
+			if (isLetterOrDigit(chars[0])) {
 				isValid = analyzeWordAndDetermineIfItIsValid(character);
-			}else
-				isValid =  analyzeOperatorAndDetermineIfItIsValid(character);
-			
+			} else
+				isValid = analyzeOperatorAndDetermineIfItIsValid(character);
+
 			if (!isValid)
 				handleSyntaxError();
 		}
@@ -141,7 +141,11 @@ private static void analyzeCodeLine(String line) throws Exception {
 		throw new Exception("SYNTAX ERROR");
 	}
 
-	private static boolean analyzeWordAndDetermineIfItIsValid(String word) throws Exception {
+	private static boolean isLetterOrDigit(char c) {
+		return Character.isLetter(c) || Character.isDigit(c);
+	}
+
+	private static boolean analyzeWordAndDetermineIfItIsValid(String word) {
 
 		boolean isValid = true;
 		if (!word.isBlank()) {
@@ -172,7 +176,7 @@ private static void analyzeCodeLine(String line) throws Exception {
 		return isValid;
 	}
 
-	private static boolean analyzeOperatorAndDetermineIfItIsValid(String operator) throws Exception {
+	private static boolean analyzeOperatorAndDetermineIfItIsValid(String operator) {
 
 		boolean isValid = true;
 		if (!operator.isBlank()) {
@@ -183,7 +187,7 @@ private static void analyzeCodeLine(String line) throws Exception {
 				outputLine = token + "";
 
 			} else {
-				outputLine = "INVALID OPERATOR: " + operator;
+				outputLine = "SYNTAX ERROR: INVALID OPERATOR: " + operator;
 				isValid = false;
 			}
 
@@ -193,7 +197,7 @@ private static void analyzeCodeLine(String line) throws Exception {
 
 		return isValid;
 	}
-	
+
 	private static void initializeTokens() {
 
 		try {
@@ -232,7 +236,5 @@ private static void analyzeCodeLine(String line) throws Exception {
 			e.printStackTrace();
 		}
 	}
-
-	
 
 }
