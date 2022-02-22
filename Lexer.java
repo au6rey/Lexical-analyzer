@@ -59,25 +59,33 @@ public class Lexer {
 
 		if (chars.length > 1) {
 			char nextChar;
+			int n = 1;
 
 			if (isLetterOrDigit(chars[0])) {
 				word += chars[0];
 			} else {
 				operator += chars[0];
+				
+				if(currentOperatorHasMoreThanOneSymbol(true, chars[0], chars[1])) {
+					operator = chars[0] + "" + chars[1];
+					 n += 1;
+				}
+				
+				boolean isValidOperator = analyzeOperatorAndDetermineIfItIsValid(operator);
+				operator = "";
+
+				if (!isValidOperator)
+					handleSyntaxError();
 			}
 
-			for (int i = 1; i < chars.length; i++) {
+			for (int i = n; i < chars.length; i++) {
 				nextChar = chars[i];
 				boolean isLastIndex = i == chars.length - 1;
 				boolean currentOperatorHasMoreThanOneSymbol = false;
 
 				if (!isLastIndex) {
 					boolean canCheckLongOperator = i + 1 <= chars.length - 1;
-					boolean isComparisonOperator = (nextChar == '<' || nextChar == '>' || nextChar == '=');
-
-					currentOperatorHasMoreThanOneSymbol = canCheckLongOperator
-							&& ((isComparisonOperator && chars[i + 1] == '=')
-									|| (nextChar == '+' && chars[i + 1] == '+'));
+					currentOperatorHasMoreThanOneSymbol = currentOperatorHasMoreThanOneSymbol(canCheckLongOperator, nextChar, chars[i + 1]);
 				}
 
 				if (isLetterOrDigit(nextChar)) {
@@ -139,6 +147,13 @@ public class Lexer {
 
 	private static void handleSyntaxError() throws Exception {
 		throw new Exception("SYNTAX ERROR");
+	}
+	
+
+	private static boolean currentOperatorHasMoreThanOneSymbol(boolean canCheckLongOperator, char nextChar, char nextCharPlus1) {
+		boolean isComparisonOperator = (nextChar == '<' || nextChar == '>' || nextChar == '=');
+		return canCheckLongOperator
+				&& ((isComparisonOperator && nextCharPlus1 == '=') || (nextChar == '+' && nextCharPlus1 == '+'));
 	}
 
 	private static boolean isLetterOrDigit(char c) {
