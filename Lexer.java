@@ -1,6 +1,3 @@
-//Aubrey Oyoolo
-//Bruce Quach
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -251,5 +248,4 @@ public class Lexer {
 			e.printStackTrace();
 		}
 	}
-
 }
